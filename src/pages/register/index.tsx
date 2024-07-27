@@ -1,20 +1,20 @@
 import Footer from '@/component/Footer/Footer'
+import RegisterPage from '@/screen/RegisterPage/RegisterPage'
 import { GetServerSideProps } from 'next'
-import React from 'react'
 
 export const getServerSideProps: GetServerSideProps = async ({
-  resolvedUrl
+    resolvedUrl,
 }) => {
-  return { props: { isLogin: resolvedUrl == '/login' } }
+    return { props: { isLogin: resolvedUrl == '/login' } }
 }
 
 const Register = ({ isLogin }: { isLogin: boolean }) => {
-  return (
-    <>
-      <div>LOL</div>
-      <Footer isLogin={isLogin} />
-    </>
-  )
+    return (
+        <>
+            <RegisterPage />
+            <Footer isLogin={isLogin} />
+        </>
+    )
 }
 
 export default Register

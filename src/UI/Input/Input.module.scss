@@ -1,0 +1,22 @@
+.cont {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #838383;
+    border-radius: 5px;
+
+    input {
+        width: 100%;
+        font-size: 16px;
+        line-height: 25px;
+
+        &::placeholder {
+            color: #838383;
+        }
+    }
+}
+
+.eye{
+    cursor: pointer;
+}
