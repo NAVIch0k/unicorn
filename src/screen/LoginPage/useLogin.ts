@@ -3,14 +3,14 @@ import useSWRMutation from 'swr/mutation'
 
 const fetcher = async (
     _: string,
-    { arg }: { arg: Parameters<typeof authApi.register>[0] }
+    { arg }: { arg: Parameters<typeof authApi.login>[0] }
 ) => {
-    return authApi.register(arg)
+    return authApi.login(arg)
 }
 
-export const useRegister = () => {
+export const useLogin = () => {
     const { trigger, error, isMutating } = useSWRMutation(
-        'register',
+        'login',
         fetcher
     )
 

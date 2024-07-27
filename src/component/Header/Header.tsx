@@ -1,7 +1,9 @@
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import s from './Header.module.scss'
 
 const Header = () => {
+    const router = useRouter()
     return (
         <div className={s.cont}>
             <div className={s.left}>
@@ -15,7 +17,9 @@ const Header = () => {
                 </div>
                 <p>Разрабатываем и запускаем сложные веб проекты</p>
             </div>
-            <button className={s.btn}>Войти</button>
+            <button className={s.btn} onClick={() => router.push('/login')}>
+                Войти
+            </button>
         </div>
     )
 }

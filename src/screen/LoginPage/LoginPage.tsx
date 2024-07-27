@@ -1,12 +1,11 @@
 import Input from '@/UI/Input/Input'
 import { setCookie } from '@/utils/setCookie'
 import { useForm, UseFormWatch } from 'react-hook-form'
-import s from './RegisterPage.module.scss'
-import { useRegister } from './useRegister'
+import s from './LoginPage.module.scss'
+import { useLogin } from './useLogin'
 
 interface formState {
     email: string
-    name: string
     password: string
 }
 
@@ -28,11 +27,10 @@ const ico = [
     },
 ]
 
-const RegisterPage = () => {
+const LoginPage = () => {
     const { register, handleSubmit, watch } = useForm<formState>()
 
-    const { trigger, isLoading } = useRegister()
-
+    const { trigger, isLoading } = useLogin()
 
     const submit = async (data: formState) => {
         try {
@@ -47,9 +45,8 @@ const RegisterPage = () => {
     return (
         <div className={s.wrapper}>
             <form className={s.cont} onSubmit={handleSubmit(submit)}>
-                <h1 className={s.title}>Регистрация в Yoldi Agency</h1>
+                <h1 className={s.title}>Вход в Yoldi Agency</h1>
                 <div className={s.inputs}>
-                    <Input label="Имя" ico={ico[0]} {...register('name')} />
                     <Input
                         label="E-mail"
                         ico={ico[1]}
@@ -76,19 +73,16 @@ const Button = ({
     watch: UseFormWatch<formState>
     isLoading: boolean
 }) => {
-    const isFilled =
-        Boolean(watch('email')) &&
-        Boolean(watch('password')) &&
-        Boolean(watch('name'))
+    const isFilled = Boolean(watch('email')) && Boolean(watch('password'))
     return (
         <button
             className={s.btn}
             type="submit"
             disabled={!isFilled || isLoading}
         >
-            Создать аккаунт
+            Войти
         </button>
     )
 }
 
-export default RegisterPage
+export default LoginPage
