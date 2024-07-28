@@ -30,15 +30,18 @@ const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
             {avatar || name ? (
                 <div className={s.info}>
                     <p>{name}</p>
-                    {avatar?.width && +avatar?.width ? (
-                        <div></div>
-                    ) : (
-                        name && (
-                            <div className={s.avatar}>
-                                {name[0].toUpperCase()}
-                            </div>
-                        )
-                    )}
+                    <div className={s.avatar}>
+                        {avatar?.width && +avatar?.width ? (
+                            <Image
+                                src={avatar.url}
+                                alt=""
+                                width={+avatar.width}
+                                height={+avatar.height}
+                            />
+                        ) : (
+                            name && name[0].toUpperCase()
+                        )}
+                    </div>
                 </div>
             ) : (
                 <button className={s.btn} onClick={() => router.push('/login')}>

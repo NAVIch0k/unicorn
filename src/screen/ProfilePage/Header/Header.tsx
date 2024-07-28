@@ -14,7 +14,9 @@ let emptyUUID = '550e8400-e29b-41d4-a716-446655440000'
 
 const Header: React.FC<HeaderProps> = ({ user }) => {
     const id = useId()
+    const id2 = useId()
     const { mutate } = useSWRConfig()
+
     const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
             const formData = new FormData()
@@ -22,7 +24,6 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
             e.target.value = ''
             try {
                 const data = await imageApi.uploadImage(formData)
-                console.log(data)
                 await userApi.updateUser({
                     coverId: data.id,
                     description: user.description,
@@ -49,6 +50,27 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
             mutate('user')
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    const uploadAvatar = async (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.[0]) {
+            const formData = new FormData()
+            formData.append('file', e.target.files?.[0])
+            e.target.value = ''
+            try {
+                const data = await imageApi.uploadImage(formData)
+                await userApi.updateUser({
+                    coverId: user?.cover?.id || emptyUUID,
+                    description: user.description,
+                    imageId: data.id,
+                    name: user.name,
+                    slug: user.slug,
+                })
+                mutate('user')
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
 
@@ -98,11 +120,27 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
                     <input type="file" id={id} onChange={uploadImage}></input>
                 </div>
             )}
-            {user.image ? (
-                <div></div>
-            ) : (
-                <div className={s.avatar}>{user.name[0].toUpperCase()}</div>
-            )}
+            <div className={s.avatar}>
+                {user.image && +user.image.width ? (
+                    <Image
+                        src={user.image.url}
+                        alt=""
+                        width={+user.image.width}
+                        height={+user.image.height}
+                    />
+                ) : (
+                    user.name[0].toUpperCase()
+                )}
+                <label className={s.avatar__upload} htmlFor={id2}>
+                    <Image
+                        src={'/svg/photo.svg'}
+                        width={41}
+                        height={31}
+                        alt=""
+                    />
+                </label>
+                <input type="file" id={id2} onChange={uploadAvatar}></input>
+            </div>
         </div>
     )
 }
