@@ -4,11 +4,17 @@ import s from './Header.module.scss'
 
 interface HeaderProps {
     name?: string
-    avatar?: string
+    avatar?: {
+        id: string
+        url: string
+        width: string
+        height: string
+    }
 }
 
 const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
     const router = useRouter()
+    console.log(avatar, name)
     return (
         <div className={s.cont}>
             <div className={s.left}>
@@ -22,8 +28,19 @@ const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
                 </div>
                 <p>Разрабатываем и запускаем сложные веб проекты</p>
             </div>
-            {avatar && name ? (
-                <div></div>
+            {avatar || name ? (
+                <div className={s.info}>
+                    <p>{name}</p>
+                    {avatar ? (
+                        <div></div>
+                    ) : (
+                        name && (
+                            <div className={s.avatar}>
+                                {name[0].toUpperCase()}
+                            </div>
+                        )
+                    )}
+                </div>
             ) : (
                 <button className={s.btn} onClick={() => router.push('/login')}>
                     Войти
