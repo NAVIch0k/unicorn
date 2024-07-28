@@ -1,5 +1,6 @@
 import Input from '@/UI/Input/Input'
 import { setCookie } from '@/utils/setCookie'
+import { useRouter } from 'next/router'
 import { useForm, UseFormWatch } from 'react-hook-form'
 import s from './RegisterPage.module.scss'
 import { useRegister } from './useRegister'
@@ -29,15 +30,16 @@ const ico = [
 ]
 
 const RegisterPage = () => {
+    const router = useRouter()
     const { register, handleSubmit, watch } = useForm<formState>()
 
     const { trigger, isLoading } = useRegister()
-
 
     const submit = async (data: formState) => {
         try {
             const res = await trigger(data)
             setCookie('token', res)
+            router.push('/account/owner')
         } catch (e: any) {
             console.log(e)
             alert(e?.response?.data?.message || 'Somethings went wrong')

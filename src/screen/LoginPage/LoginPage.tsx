@@ -3,6 +3,7 @@ import { setCookie } from '@/utils/setCookie'
 import { useForm, UseFormWatch } from 'react-hook-form'
 import s from './LoginPage.module.scss'
 import { useLogin } from './useLogin'
+import { useRouter } from 'next/router'
 
 interface formState {
     email: string
@@ -28,6 +29,7 @@ const ico = [
 ]
 
 const LoginPage = () => {
+    const router=useRouter()
     const { register, handleSubmit, watch } = useForm<formState>()
 
     const { trigger, isLoading } = useLogin()
@@ -36,6 +38,7 @@ const LoginPage = () => {
         try {
             const res = await trigger(data)
             setCookie('token', res)
+            router.push('/account/owner')
         } catch (e: any) {
             console.log(e)
             alert(e?.response?.data?.message || 'Somethings went wrong')

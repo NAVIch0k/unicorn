@@ -11,7 +11,7 @@ export const instance = axios.create({
 instance.interceptors.request.use(async (config) => {
     let token = getCookie('token')
     if (token && !config.headers.Authorization)
-        config.headers['X-Api-Key'] = `Bearer ${token}`
+        config.headers['X-Api-Key'] = token
     return config
 })
 

@@ -2,7 +2,12 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import s from './Header.module.scss'
 
-const Header = () => {
+interface HeaderProps {
+    name?: string
+    avatar?: string
+}
+
+const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
     const router = useRouter()
     return (
         <div className={s.cont}>
@@ -17,9 +22,13 @@ const Header = () => {
                 </div>
                 <p>Разрабатываем и запускаем сложные веб проекты</p>
             </div>
-            <button className={s.btn} onClick={() => router.push('/login')}>
-                Войти
-            </button>
+            {avatar && name ? (
+                <div></div>
+            ) : (
+                <button className={s.btn} onClick={() => router.push('/login')}>
+                    Войти
+                </button>
+            )}
         </div>
     )
 }

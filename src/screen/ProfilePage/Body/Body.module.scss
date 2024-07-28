@@ -1,0 +1,47 @@
+.cont {
+    padding: 85px 18.75%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h2 {
+            font-weight: 500;
+            font-size: 30px;
+            line-height: 42px;
+        }
+        p {
+            color: #838383;
+            font-size: 16px;
+            line-height: 25px;
+        }
+    }
+}
+
+.desc {
+    font-size: 16px;
+    line-height: 25px;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    width: 75%;
+}
+
+.btn {
+    display: flex;
+    gap: 13px;
+    padding: 10px 22px;
+    width: fit-content;
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    height: fit-content;
+    align-items: center;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 25px;
+}
