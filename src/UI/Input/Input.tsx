@@ -21,7 +21,7 @@ interface InputProps
         height: number
     }
     eye?: boolean
-    label: string
+    label?: string
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(

@@ -1,17 +1,23 @@
+import { IUser } from '@/entity/entity'
 import { setCookie } from '@/utils/setCookie'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { mutate } from 'swr'
+import UpdateProfileModal from '../UpdateProfileModal/UpdateProfileModal'
 import s from './Body.module.scss'
 
 interface BodyProps {
-    description: string
-    email: string
-    name: string
+    user: IUser
 }
 
-const Body: React.FC<BodyProps> = ({ description, email, name }) => {
+const Body: React.FC<BodyProps> = ({ user }) => {
     const router = useRouter()
+    const [isOpen, setIsOpen] = useState(false)
+
+    const toggleModal = () => {
+        setIsOpen((e) => !e)
+    }
 
     const logOut = () => {
         setCookie('token', '', {
@@ -24,19 +30,20 @@ const Body: React.FC<BodyProps> = ({ description, email, name }) => {
         <div className={s.cont}>
             <div className={s.header}>
                 <div className={s.header__info}>
-                    <h2>{name}</h2>
-                    <p>{email}</p>
+                    <h2>{user.name}</h2>
+                    <p>{user.email}</p>
                 </div>
-                <button className={s.btn}>
+                <button className={s.btn} onClick={toggleModal}>
                     <Image src={'/svg/pen.svg'} width={19} height={19} alt="" />
                     <p>Редактировать</p>
                 </button>
             </div>
-            <p className={s.desc}>{description}</p>
+            <p className={s.desc}>{user.description}</p>
             <button className={s.btn} onClick={logOut}>
                 <Image src={'/svg/logOut.svg'} alt="" width={19} height={19} />
                 <p>Выйти</p>
             </button>
+            {isOpen && <UpdateProfileModal close={toggleModal} user={user} />}
         </div>
     )
 }

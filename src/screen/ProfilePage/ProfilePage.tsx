@@ -8,11 +8,7 @@ const ProfilePage = ({ user }: { user: IUser }) => {
     return (
         <>
             <Header user={data || user} />
-            <Body
-                name={(data || user).name}
-                description={(data || user).description}
-                email={(data || user).email}
-            />
+            <Body user={data || user} />
         </>
     )
 }
