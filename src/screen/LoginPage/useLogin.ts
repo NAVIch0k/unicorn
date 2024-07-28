@@ -9,10 +9,7 @@ const fetcher = async (
 }
 
 export const useLogin = () => {
-    const { trigger, error, isMutating } = useSWRMutation(
-        'login',
-        fetcher
-    )
+    const { trigger, error, isMutating } = useSWRMutation('login', fetcher)
 
     return { trigger, error, isLoading: isMutating }
 }

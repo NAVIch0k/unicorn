@@ -49,7 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                     />
                 )}
                 <input
-                    type={isHidden ? 'password' : type||'text'}
+                    type={isHidden ? 'password' : type || 'text'}
                     ref={inputRef}
                     onClick={(e) => e.stopPropagation()}
                     placeholder={label}

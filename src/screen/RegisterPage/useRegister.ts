@@ -9,10 +9,7 @@ const fetcher = async (
 }
 
 export const useRegister = () => {
-    const { trigger, error, isMutating } = useSWRMutation(
-        'register',
-        fetcher
-    )
+    const { trigger, error, isMutating } = useSWRMutation('register', fetcher)
 
     return { trigger, error, isLoading: isMutating }
 }

@@ -1,9 +1,9 @@
 import Input from '@/UI/Input/Input'
 import { setCookie } from '@/utils/setCookie'
+import { useRouter } from 'next/router'
 import { useForm, UseFormWatch } from 'react-hook-form'
 import s from './LoginPage.module.scss'
 import { useLogin } from './useLogin'
-import { useRouter } from 'next/router'
 
 interface formState {
     email: string
@@ -29,7 +29,7 @@ const ico = [
 ]
 
 const LoginPage = () => {
-    const router=useRouter()
+    const router = useRouter()
     const { register, handleSubmit, watch } = useForm<formState>()
 
     const { trigger, isLoading } = useLogin()

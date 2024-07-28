@@ -1,4 +1,4 @@
-import { userApi } from '@/api/user/userApi'
+import { profileApi } from '@/api/profile/profileApi'
 import { IUser } from '@/entity/entity'
 import Input from '@/UI/Input/Input'
 import { useForm } from 'react-hook-form'
@@ -33,7 +33,7 @@ const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
 
     const updateProfile = async (data: formState) => {
         try {
-            await userApi.updateUser({
+            await profileApi.updateUser({
                 coverId: user.cover?.id || emptyUUID,
                 description: data.description,
                 imageId: user.image?.id,

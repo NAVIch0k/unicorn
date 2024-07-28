@@ -1,7 +1,7 @@
-import { userApi } from '@/api/user/userApi'
+import { profileApi } from '@/api/profile/profileApi'
 import { IUser } from '@/entity/entity'
 import useSWR from 'swr'
 
 export const useGetUserInfo = ({ user }: { user?: IUser }) => {
-    return useSWR('user', userApi.getInfo, { fallbackData: user })
+    return useSWR('user', profileApi.getInfo, { fallbackData: user })
 }

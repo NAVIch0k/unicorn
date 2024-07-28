@@ -1,5 +1,5 @@
 import { imageApi } from '@/api/image/imageApi'
-import { userApi } from '@/api/user/userApi'
+import { profileApi } from '@/api/profile/profileApi'
 import { IUser } from '@/entity/entity'
 import Image from 'next/image'
 import { ChangeEvent, useId } from 'react'
@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
             e.target.value = ''
             try {
                 const data = await imageApi.uploadImage(formData)
-                await userApi.updateUser({
+                await profileApi.updateUser({
                     coverId: data.id,
                     description: user.description,
                     imageId: user?.image?.id || emptyUUID,
@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
 
     const deleteImage = async () => {
         try {
-            await userApi.updateUser({
+            await profileApi.updateUser({
                 coverId: emptyUUID,
                 description: user.description,
                 imageId: user?.image?.id || emptyUUID,
@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
             e.target.value = ''
             try {
                 const data = await imageApi.uploadImage(formData)
-                await userApi.updateUser({
+                await profileApi.updateUser({
                     coverId: user?.cover?.id || emptyUUID,
                     description: user.description,
                     imageId: data.id,
