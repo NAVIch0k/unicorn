@@ -12,7 +12,7 @@ const redirect = () => ({
 })
 
 export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-    if (req.cookies.token) {
+    if (req.cookies?.token) {
         try {
             let res = await fetch(URL + 'profile', {
                 headers: {
@@ -26,6 +26,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
             return {
                 props: {
                     user: res,
+                    token: req.cookies.token,
                 },
             }
         } catch (e) {
@@ -37,8 +38,8 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     }
 }
 
-const Profile = ({ user }: { user: IUser }) => {
-    return <ProfilePage user={user} />
+const Profile = ({ user, token }: { user: IUser; token: string }) => {
+    return <ProfilePage user={user} token={token} />
 }
 
 export default Profile

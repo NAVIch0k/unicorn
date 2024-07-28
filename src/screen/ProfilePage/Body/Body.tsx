@@ -9,9 +9,10 @@ import s from './Body.module.scss'
 
 interface BodyProps {
     user: IUser
+    isGuest: boolean
 }
 
-const Body: React.FC<BodyProps> = ({ user }) => {
+const Body: React.FC<BodyProps> = ({ user, isGuest }) => {
     const router = useRouter()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -23,7 +24,11 @@ const Body: React.FC<BodyProps> = ({ user }) => {
         setCookie('token', '', {
             'max-age': -1,
         })
-        router.push('/login').then(() => mutate('user', null, false))
+        router
+            .push('/login')
+            .then(() =>
+                mutate(['user', null, null], null, { revalidate: true })
+            )
     }
 
     return (
@@ -33,16 +38,30 @@ const Body: React.FC<BodyProps> = ({ user }) => {
                     <h2>{user.name}</h2>
                     <p>{user.email}</p>
                 </div>
-                <button className={s.btn} onClick={toggleModal}>
-                    <Image src={'/svg/pen.svg'} width={19} height={19} alt="" />
-                    <p>Редактировать</p>
-                </button>
+                {!isGuest && (
+                    <button className={s.btn} onClick={toggleModal}>
+                        <Image
+                            src={'/svg/pen.svg'}
+                            width={19}
+                            height={19}
+                            alt=""
+                        />
+                        <p>Редактировать</p>
+                    </button>
+                )}
             </div>
             <p className={s.desc}>{user.description}</p>
-            <button className={s.btn} onClick={logOut}>
-                <Image src={'/svg/logOut.svg'} alt="" width={19} height={19} />
-                <p>Выйти</p>
-            </button>
+            {!isGuest && (
+                <button className={s.btn} onClick={logOut}>
+                    <Image
+                        src={'/svg/logOut.svg'}
+                        alt=""
+                        width={19}
+                        height={19}
+                    />
+                    <p>Выйти</p>
+                </button>
+            )}
             {isOpen && <UpdateProfileModal close={toggleModal} user={user} />}
         </div>
     )

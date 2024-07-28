@@ -6,4 +6,8 @@ export const userApi = {
         const res = await instance.get<IUser[]>('user')
         return res.data
     },
+    async getUserInfo(slug: string) {
+        const res = await instance.get<IUser>(`user/${slug}`)
+        return res.data
+    },
 }

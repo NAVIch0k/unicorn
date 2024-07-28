@@ -33,14 +33,14 @@ const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
 
     const updateProfile = async (data: formState) => {
         try {
-            await profileApi.updateUser({
+            const res = await profileApi.updateUser({
                 coverId: user.cover?.id || emptyUUID,
                 description: data.description,
                 imageId: user.image?.id,
                 name: data.name,
                 slug: data.slug,
             })
-            mutate('user')
+            mutate(['user', user, null], res, { revalidate: true })
             close()
         } catch (e) {
             console.log(e)

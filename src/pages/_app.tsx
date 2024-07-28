@@ -12,7 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
     const user = pageProps?.user as IUser | undefined
     return (
         <div className={clsx(inter.className, s.cont)}>
-            <Header avatar={user?.image} name={user?.name} />
+            <Header
+                user={user}
+                slug={pageProps?.slug}
+                token={pageProps?.token}
+            />
             <Component {...pageProps} />
         </div>
     )

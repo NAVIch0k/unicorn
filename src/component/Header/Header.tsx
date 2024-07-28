@@ -1,19 +1,20 @@
+import { IUser } from '@/entity/entity'
+import { useGetUserInfo } from '@/hook/useGetUserInfo'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import React from 'react'
 import s from './Header.module.scss'
 
 interface HeaderProps {
-    name?: string
-    avatar?: {
-        id: string
-        url: string
-        width: string
-        height: string
-    }
+    user?: IUser
+    slug?: string
+    token?: string
 }
 
-const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
+const Header: React.FC<HeaderProps> = ({ user, slug, token }) => {
     const router = useRouter()
+    const { data } = useGetUserInfo({ user, slug, token })
+    const userInfo = data || user
     return (
         <div className={s.cont}>
             <div className={s.left}>
@@ -27,19 +28,19 @@ const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
                 </div>
                 <p>Разрабатываем и запускаем сложные веб проекты</p>
             </div>
-            {avatar || name ? (
+            {userInfo?.image || userInfo?.name ? (
                 <div className={s.info}>
-                    <p>{name}</p>
+                    <p>{userInfo.name}</p>
                     <div className={s.avatar}>
-                        {avatar?.width && +avatar?.width ? (
+                        {userInfo?.image?.width && +userInfo?.image?.width ? (
                             <Image
-                                src={avatar.url}
+                                src={userInfo.image.url}
                                 alt=""
-                                width={+avatar.width}
-                                height={+avatar.height}
+                                width={+userInfo.image.width}
+                                height={+userInfo.image.height}
                             />
                         ) : (
-                            name && name[0].toUpperCase()
+                            userInfo?.name && userInfo.name[0].toUpperCase()
                         )}
                     </div>
                 </div>

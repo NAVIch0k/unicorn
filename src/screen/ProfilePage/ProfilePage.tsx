@@ -1,14 +1,20 @@
 import { IUser } from '@/entity/entity'
+import { useGetUserInfo } from '../../hook/useGetUserInfo'
 import Body from './Body/Body'
 import Header from './Header/Header'
-import { useGetUserInfo } from './useGetUserInfo'
 
-const ProfilePage = ({ user }: { user: IUser }) => {
-    const { data } = useGetUserInfo({ user })
+interface ProfilePageProps {
+    user: IUser
+    slug?: string
+    token?: string
+}
+
+const ProfilePage: React.FC<ProfilePageProps> = ({ user, slug, token }) => {
+    const { data } = useGetUserInfo({ user, slug, token })
     return (
         <>
-            <Header user={data || user} />
-            <Body user={data || user} />
+            <Header user={data || user} isGuest={!!slug} />
+            <Body user={data || user} isGuest={!!slug} />
         </>
     )
 }
