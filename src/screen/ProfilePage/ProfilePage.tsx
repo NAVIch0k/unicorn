@@ -7,11 +7,7 @@ const ProfilePage = ({ user }: { user: IUser }) => {
     const { data } = useGetUserInfo({ user })
     return (
         <>
-            <Header
-                cover={(data || user).cover}
-                image={(data || user).image}
-                name={(data || user).name}
-            />
+            <Header user={data || user} />
             <Body
                 name={(data || user).name}
                 description={(data || user).description}

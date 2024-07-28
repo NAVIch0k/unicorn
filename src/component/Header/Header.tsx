@@ -14,7 +14,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
     const router = useRouter()
-    console.log(avatar, name)
     return (
         <div className={s.cont}>
             <div className={s.left}>
@@ -31,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ avatar, name }) => {
             {avatar || name ? (
                 <div className={s.info}>
                     <p>{name}</p>
-                    {avatar ? (
+                    {avatar?.width && +avatar?.width ? (
                         <div></div>
                     ) : (
                         name && (
