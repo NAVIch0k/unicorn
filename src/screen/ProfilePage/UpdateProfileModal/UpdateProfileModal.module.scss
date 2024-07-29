@@ -1,5 +1,5 @@
 .wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -105,5 +105,26 @@
             background: black;
             color: white;
         }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cont {
+        height: 100%;
+        border: none;
+        border-radius: 0px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+    .wrapper{
+        top: 81px;
+        height: calc(100vh - 81px);
+    }
+    .area{
+        height: 284px;
+    }
+    .footer{
+        margin-top: auto;
     }
 }

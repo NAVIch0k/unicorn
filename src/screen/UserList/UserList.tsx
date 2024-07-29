@@ -21,22 +21,22 @@ const UserList: React.FC<UserListProps> = ({ userList }) => {
                         className={s.el}
                         key={el.email}
                     >
-                        <div className={s.el__info}>
-                            <div>
-                                {el.image && +el.image?.width ? (
-                                    <Image
-                                        src={el.image.url}
-                                        alt=""
-                                        width={+el.image.width}
-                                        height={+el.image.height}
-                                    />
-                                ) : (
-                                    el.name[0].toUpperCase()
-                                )}
-                            </div>
-                            <p>{el.name}</p>
+                        <div className={s.el__avatar}>
+                            {el.image && +el.image?.width ? (
+                                <Image
+                                    src={el.image.url}
+                                    alt=""
+                                    width={+el.image.width}
+                                    height={+el.image.height}
+                                />
+                            ) : (
+                                el.name[0].toUpperCase()
+                            )}
                         </div>
-                        <p>{el.email}</p>
+                        <div className={s.el__info}>
+                            <p>{el.name}</p>
+                            <p>{el.email}</p>
+                        </div>
                     </Link>
                 ))}
             </div>

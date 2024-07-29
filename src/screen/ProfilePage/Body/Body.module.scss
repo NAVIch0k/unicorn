@@ -5,6 +5,8 @@
 .header {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px 21px;
 
     &__info {
         display: flex;
@@ -44,4 +46,16 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 25px;
+}
+
+@media screen and (max-width: 800px) {
+    .desc {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .cont {
+        padding: 85px 30px;
+    }
 }

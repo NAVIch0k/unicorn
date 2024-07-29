@@ -1,6 +1,7 @@
 import { profileApi } from '@/api/profile/profileApi'
 import { IUser } from '@/entity/entity'
 import Input from '@/UI/Input/Input'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSWRConfig } from 'swr'
 import s from './UpdateProfileModal.module.scss'
@@ -21,6 +22,13 @@ const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
     close,
     user,
 }) => {
+    useEffect(() => {
+        document.documentElement.style.overflowY = 'hidden'
+        return () => {
+            document.documentElement.style.overflowY = 'auto'
+        }
+    }, [])
+
     const { mutate } = useSWRConfig()
 
     const { register, handleSubmit } = useForm<formState>({

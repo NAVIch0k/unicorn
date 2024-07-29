@@ -47,3 +47,11 @@
         cursor: default;
     }
 }
+
+@media screen and (max-width:500px){
+    .cont{
+        max-width: 500px;
+        height: 100%;
+        border: none;
+    }
+}
