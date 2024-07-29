@@ -16,10 +16,11 @@ export const useGetUserInfo = ({
 }: useGetUserInfoProps) => {
     if (token || slug) {
         return useSWR(
-            ['user', user, slug],
+            'profile',
             slug ? () => userApi.getUserInfo(slug) : profileApi.getInfo,
             {
                 fallbackData: user,
+                revalidateOnFocus: false,
             }
         )
     } else {

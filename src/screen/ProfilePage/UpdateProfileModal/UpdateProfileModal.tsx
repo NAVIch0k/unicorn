@@ -40,7 +40,7 @@ const UpdateProfileModal: React.FC<UpdateProfileModalProps> = ({
                 name: data.name,
                 slug: data.slug,
             })
-            mutate(['user', user, null], res, { revalidate: true })
+            mutate('profile', res, { revalidate: false })
             close()
         } catch (e) {
             console.log(e)

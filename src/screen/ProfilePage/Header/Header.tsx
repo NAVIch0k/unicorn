@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ user, isGuest }) => {
                     name: user.name,
                     slug: user.slug,
                 })
-                mutate(['user', res, null], res, { revalidate: true })
+                mutate('profile', res, { revalidate: false })
             } catch (e) {
                 console.log(e)
             }
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ user, isGuest }) => {
                 name: user.name,
                 slug: user.slug,
             })
-            mutate(['user', res, null], res, { revalidate: true })
+            mutate('profile', res, { revalidate: false })
         } catch (e) {
             console.log(e)
         }
@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ user, isGuest }) => {
                     name: user.name,
                     slug: user.slug,
                 })
-                mutate(['user', res, null], res, { revalidate: true })
+                mutate('profile', res, { revalidate: false })
             } catch (e) {
                 console.log(e)
             }
