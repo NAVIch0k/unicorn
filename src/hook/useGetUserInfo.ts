@@ -16,7 +16,7 @@ export const useGetUserInfo = ({
 }: useGetUserInfoProps) => {
     if (token || slug) {
         return useSWR(
-            'profile',
+            slug ? `profile/${slug}` : 'profile',
             slug ? () => userApi.getUserInfo(slug) : profileApi.getInfo,
             {
                 fallbackData: user,
@@ -26,6 +26,7 @@ export const useGetUserInfo = ({
     } else {
         return {
             data: null,
+            isLoading: false,
         }
     }
 }

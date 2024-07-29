@@ -13,7 +13,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ user, slug, token }) => {
     const router = useRouter()
-    const { data } = useGetUserInfo({ user, slug, token })
+    const { data, isLoading } = useGetUserInfo({ user, slug, token })
     const userInfo = data || user
     return (
         <div className={s.cont}>
@@ -28,27 +28,32 @@ const Header: React.FC<HeaderProps> = ({ user, slug, token }) => {
                 </div>
                 <p>Разрабатываем и запускаем сложные веб проекты</p>
             </div>
-            {userInfo?.image || userInfo?.name ? (
-                <div className={s.info}>
-                    <p>{userInfo.name}</p>
-                    <div className={s.avatar}>
-                        {userInfo?.image?.width && +userInfo?.image?.width ? (
-                            <Image
-                                src={userInfo.image.url}
-                                alt=""
-                                width={+userInfo.image.width}
-                                height={+userInfo.image.height}
-                            />
-                        ) : (
-                            userInfo?.name && userInfo.name[0].toUpperCase()
-                        )}
+            {!isLoading &&
+                (userInfo?.image || userInfo?.name ? (
+                    <div className={s.info}>
+                        <p>{userInfo.name}</p>
+                        <div className={s.avatar}>
+                            {userInfo?.image?.width &&
+                            +userInfo?.image?.width ? (
+                                <Image
+                                    src={userInfo.image.url}
+                                    alt=""
+                                    width={+userInfo.image.width}
+                                    height={+userInfo.image.height}
+                                />
+                            ) : (
+                                userInfo?.name && userInfo.name[0].toUpperCase()
+                            )}
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <button className={s.btn} onClick={() => router.push('/login')}>
-                    Войти
-                </button>
-            )}
+                ) : (
+                    <button
+                        className={s.btn}
+                        onClick={() => router.push('/login')}
+                    >
+                        Войти
+                    </button>
+                ))}
         </div>
     )
 }
