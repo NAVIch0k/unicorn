@@ -26,9 +26,7 @@ const Body: React.FC<BodyProps> = ({ user, isGuest }) => {
         })
         router
             .push('/login')
-            .then(() =>
-                mutate('profile', null, { revalidate: false })
-            )
+            .then(() => mutate('profile', null, { revalidate: false }))
     }
 
     return (
